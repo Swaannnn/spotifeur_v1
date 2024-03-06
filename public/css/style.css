@@ -1,7 +1,49 @@
 * {
+    padding: none;
+    margin: none;
+
     text-decoration: none;
 
     background-color: #191414;
     color: #fff;
     font-family: Montserrat, sans-serif;
+}
+
+header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 0 50px;
+}
+
+.liens {    
+    display: flex;
+}
+
+.liens div {
+    width: 80px;
+}
+
+.liens a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+}
+
+.liens a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.liens a:hover::before {
+    width: 100%;
 }

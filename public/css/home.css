@@ -1,21 +1,3 @@
-header {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin: 0 50px;
-}
-
-.liens {    
-    display: flex;
-}
-
-.liens div {
-    width: 80px;
-}
-
 #avatar {
     border-radius: 50%;
     width: 200px;

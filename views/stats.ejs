@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stats.css">
+    <title>Spotifeur | Statistiques</title>
+</head>
+
+<body>
+    <%- include('header') %>
+
+    <section>
+        <div class="top">
+            <p class="toph2">Top &nbsp; <p id="soa"></p></p>
+            <p class="vide"></p>
+            <button class="btn active" id="4w" value="short_term">4 semaines</button>
+            <button class="btn" id="6m" value="medium_term">6 mois</button>
+            <button class="btn" id="aw" value="long_term">toujours</button>
+            <p class="vide"></p>
+            <button class="btn active" id="son">Sons</button>
+            <button class="btn" id="artiste">Artistes</button>
+        </div>
+
+        <div>
+            <table class="result"></table>
+        </div>
+    </section>
+
+    <script>
+        var accessToken = "<%= accessToken %>";
+    </script>
+    <script src="/js/stats.js"></script>
+    
+</body>
+
+</html>

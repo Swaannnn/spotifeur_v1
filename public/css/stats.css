@@ -1,0 +1,38 @@
+.top {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.toph2 {
+    display: flex;
+}
+
+.btn {
+    border: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+    color: #b2b2b2;
+}
+
+.btn:active {
+    color: #ffffff;
+}
+
+.btn.active {
+    color: #1DB954;
+}
+
+.btn.active:hover {
+    color: #17823c;
+}
+
+.btn.active:active {
+    color: #1DB954;
+}
+
+.vide {
+    width: 50px;
+}
