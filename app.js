@@ -99,7 +99,6 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get('/stats', (req, res) => {
-    console.log(profile)
     res.render('stats', {
         accessToken: req.cookies.accessToken,
         refreshToken: req.cookies.refreshToken,
