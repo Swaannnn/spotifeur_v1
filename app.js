@@ -21,7 +21,8 @@ const clientSecret = process.env.CLIENT_SECRET
 const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
-    redirectUri: 'http://localhost:8888/callback'
+    // redirectUri: 'http://localhost:8888/callback'
+    redirectUri: 'https://spotifeur.onrender.com/callback'
 })
 
 function isLoggedIn(req, res, next) {
@@ -123,7 +124,8 @@ app.get('/logout', (req, res) => {
 // démarrage serveur
 const port = 8888
 app.listen(port, () => {
-console.log(`Server is listening at http://localhost:${port}`)
+// console.log(`Server is listening at http://localhost:${port}`)
+    console.log('SPOTIFEUR !!')
 })
 
 
