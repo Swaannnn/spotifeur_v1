@@ -16,7 +16,11 @@
     <%- include('header') %>
 
     <section>
-        <img id="avatar" src="<%= profile.images[1].url %>">
+        <% if (profile.images[1]) { %>
+            <img id="avatar" src="<%= profile.images[1].url %>">
+        <% } else { %>
+            <img id="avatar" src="https://i.pinimg.com/236x/b2/d1/c3/b2d1c389dfc8e701970cf161240fb961.jpg">
+        <% } %>
         <p><%= profile.display_name %></p>
     </section>
 

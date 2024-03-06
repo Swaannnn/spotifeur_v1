@@ -193,6 +193,7 @@ son.addEventListener("click", () => {
   son.classList.add("active")
   artiste.classList.remove("active")
   startTracks(document.querySelector('.btn.active').value)
+  resetTop()
 })
 
 artiste.addEventListener("click", () => {

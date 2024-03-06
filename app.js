@@ -21,8 +21,8 @@ const clientSecret = process.env.CLIENT_SECRET
 const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
-    // redirectUri: 'http://localhost:8888/callback'
-    redirectUri: 'https://spotifeur.onrender.com/callback'
+    redirectUri: 'http://localhost:8888/callback'
+    // redirectUri: 'https://spotifeur.onrender.com/callback'
 })
 
 function isLoggedIn(req, res, next) {
@@ -99,6 +99,7 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get('/stats', (req, res) => {
+    console.log(profile)
     res.render('stats', {
         accessToken: req.cookies.accessToken,
         refreshToken: req.cookies.refreshToken,
