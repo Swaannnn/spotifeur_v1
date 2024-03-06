@@ -1,0 +1,44 @@
+/* PAGE DE CONNEXION */
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+
+.bvn {
+    color: #1DB954;
+    font-size: 35px;
+    font-weight: 900;
+}
+
+/* .desc {
+
+} */
+
+.btn {
+    color: #191414;
+    background-color: #1DB954;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 280px;
+    height: 50px;
+    margin: 15px auto;
+    border-radius: 25px;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn:hover {
+    background-color: #33c867;
+}
+
+.btn:active {
+    background-color: #179744;
+}

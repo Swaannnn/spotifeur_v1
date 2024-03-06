@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <title>Home</title>
+</head>
+<body>    
+    <!-- INFOS UTILISATEUR -->
+    <!-- <p>Access Token : <%= accessToken %></p>
+    <p>Refresh Token : <%= refreshToken %></p>
+    <p>Code : <%= code %></p>
+    <p>User ID : <%= userId%></p> -->
+
+    <header>
+        <img src="img/spotify.webp" alt="logo spotify" width="60px">
+        <div class="liens">
+            <a href="/topTracks">Get top tracks</a>
+            <div></div>
+            <a href="/oui">autre lien</a>
+            <div></div>
+            <a href="/bientot">Create Playlist ?</a>
+            <div></div>
+            <a href="/recommendations">recommendations</a>
+        </div>
+        <a href="/logout">Se déconnecter</a>
+    </header>
+
+    <section>
+        <img id="avatar" src="<%= profile.images[1].url %>">
+        <p><%= profile.display_name %></p>
+    </section>
+
+</body>
+</html>

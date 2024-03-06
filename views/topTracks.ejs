@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Stats</title>
+</head>
+
+<body>
+    <section>
+        <h2>Titres les plus écoutés :</h2>
+        <br>
+        <p>
+            Afficher vos
+            <input type="number" id="nbTrack" min="0" max="50">
+            titres Spotify les plus écoutés depuis
+            <select name="temps" id="timeAgoT">
+                <option value="short_term">4 semaines</option>
+                <option value="medium_term">6 mois</option>
+                <option value="long_term">toujours</option>
+            </select>
+            <br><br>
+            <a class="bouton" id="boutonValider">Valider !</a>
+        </p>
+    </div>
+    <div class="resultat">
+        <div class="container1">
+            <div id="number"></div>
+        </div>
+        <div class="container2">
+            <div id="cover"></div>
+        </div>
+        <div class="container3">
+            <div id="trackArtist"></div>
+        </div>
+    </section>
+    <script>
+        var accessToken = "<%= accessToken %>";
+    </script>
+    <script src="/js/getTopTracks.js"></script>
+    
+</body>
+
+</html>
