@@ -128,11 +128,11 @@ app.get('/logout', (req, res) => {
 
 
 // démarrage serveur
-// const port = 8888
-// app.listen(port, () => {
-// // console.log(`Server is listening at http://localhost:${port}`)
-//     console.log('SPOTIFEUR !!')
-// })
+const port = 8888
+app.listen(port, () => {
+// console.log(`Server is listening at http://localhost:${port}`)
+    console.log('SPOTIFEUR !!')
+})
 
 
 // récupérer infos profil
