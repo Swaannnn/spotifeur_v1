@@ -11,36 +11,36 @@ async function fetchWebApi(token, endpoint, method, body) {
 }
 
 // récupère le top 10 artiste
-async function getTopArtists(timeAgo) {
+async function getTopArtists(timeAgo, nbA) {
     return (
         await fetchWebApi(
-            accessToken, "v1/me/top/artists?time_range=" + timeAgo + "&limit=10", "GET"
+            accessToken, "v1/me/top/artists?time_range=" + timeAgo + "&limit=" + nbA, "GET"
         )
     ).items
 }
 
 // ajoute le top 10 artiste dans les variables
 async function getArtists() {
-    const topArtistsShortTerm = await getTopArtists("short_term")
-    const topArtistsMediumTerm = await getTopArtists("medium_term")
-    const topArtistsLongTerm = await getTopArtists("long_term")
+    const topArtistsShortTerm = await getTopArtists("short_term", 5)
+    const topArtistsMediumTerm = await getTopArtists("medium_term", 5)
+    const topArtistsLongTerm = await getTopArtists("long_term", 5)
 
-    var artistsShortTerm = []
-    for (i=0; i<10; i++) {
-        artistsShortTerm.push(topArtistsShortTerm[i].id)
+    var idArtistsShortTerm = []
+    for (i=0; i<5; i++) {
+        idArtistsShortTerm.push(topArtistsShortTerm[i].id)
     }
     
-    var artistsMediumTerm = []
-    for (i=0; i<10; i++) {
-        artistsMediumTerm.push(topArtistsMediumTerm[i].id)
+    var idArtistsMediumTerm = []
+    for (i=0; i<5; i++) {
+        idArtistsMediumTerm.push(topArtistsMediumTerm[i].id)
     }
     
-    var artistsLongTerm = []
-    for (i=0; i<10; i++) {
-        artistsLongTerm.push(topArtistsLongTerm[i].id)
+    var idArtistsLongTerm = []
+    for (i=0; i<5; i++) {
+        idArtistsLongTerm.push(topArtistsLongTerm[i].id)
     }
 
-    return [artistsShortTerm, artistsMediumTerm, artistsLongTerm]
+    return [idArtistsShortTerm, idArtistsMediumTerm, idArtistsLongTerm]
 }
 
 // récupère le top 10 artiste
@@ -53,15 +53,45 @@ async function getRelatedArtists(id) {
 }
 
 async function getRelated() {
+    var artists = []
+    const topArtistsShortTerm = await getTopArtists("short_term", 50)
+    const topArtistsMediumTerm = await getTopArtists("medium_term", 50)
+    const topArtistsLongTerm = await getTopArtists("long_term", 50)
+    for (i=0; i<50; i++) {
+        if (!(artists.includes(topArtistsLongTerm[i].name))) {
+            artists.push(topArtistsLongTerm[i].name)
+        }
+        if (!(artists.includes(topArtistsMediumTerm[i].name))) {
+            artists.push(topArtistsMediumTerm[i].name)
+        }
+        if (!(artists.includes(topArtistsShortTerm[i].name))) {
+            artists.push(topArtistsShortTerm[i].name)
+        }
+    }
+
     var [ast, amt, alt] = await getArtists()
 
     const artistRecoShort = await getRelatedArtists(ast[Math.floor(Math.random() * 5)])
     const artistRecoMedium = await getRelatedArtists(amt[Math.floor(Math.random() * 5)])
     const artistRecoLong = await getRelatedArtists(alt[Math.floor(Math.random() * 5)])
 
-    artist1 = artistRecoShort[Math.floor(Math.random() * 10)]
-    artist2 = artistRecoMedium[Math.floor(Math.random() * 10)]
-    artist3 = artistRecoLong[Math.floor(Math.random() * 10)]
+    let namea1 = artists[0]
+    while (artists.includes(namea1)) {
+        artist1 = artistRecoShort[Math.floor(Math.random() * 10)]
+        namea1 = artist1.name
+    }
+
+    let namea2 = artists[0]
+    while (artists.includes(namea2) || namea2 == namea1) {
+        artist2 = artistRecoMedium[Math.floor(Math.random() * 10)]
+        namea2 = artist2.name
+    }
+    
+    let namea3 = artists[0]
+    while (artists.includes(namea3) || namea3 == namea1 || namea3 == namea2) {
+        artist3 = artistRecoLong[Math.floor(Math.random() * 10)]
+        namea3 = artist3.name
+    }
 
     addRelatedArtists(artist1, artist2, artist3)
 }
@@ -99,10 +129,6 @@ async function addRelatedArtists(a1, a2, a3) {
     vida2url = modifyUrl(vida2url)
     vida3url = modifyUrl(vida3url)
 
-    console.log(vida1url)
-    console.log(vida2url)
-    console.log(vida3url)
-
     vida1.src = vida1url
     vida2.src = vida2url
     vida3.src = vida3url
@@ -123,32 +149,30 @@ function modifyUrl(url) {
 // YOUTUBE
 
 async function searchYouTube(query, apiKey) {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(query)}&key=${apiKey}`
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`
 
     const response = await fetch(url)
     const data = await response.json()
 
-    // if (!response.ok) {
-    //     throw new Error(data.error.message || 'Failed to fetch YouTube data');
-    // }
+    let videoId
 
-    // if (data.items.length === 0) {
-    //     throw new Error('No video found')
-    // }
+    if (data.items[0].id.kind === 'youtube#channel') {
+        videoId = data.items[1].id.videoId
+    } else {
+        videoId = data.items[0].id.videoId
+    }
 
-    const videoId = data.items[0].id.videoId
-    console.log(videoId)
     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
 
     return videoUrl
 }
+
 
 async function yt(query) {
     try {
         const apiKey = cleApiYoutube
 
         const videoUrl = await searchYouTube(query, apiKey)
-        console.log('Lien :', videoUrl)
         return videoUrl
     } catch (error) {
         console.error('Erreur lors de la recherche sur YouTube :', error)
