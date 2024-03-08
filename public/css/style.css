@@ -4,9 +4,12 @@
 
     text-decoration: none;
 
-    background-color: #191414;
     color: #fff;
     font-family: Montserrat, sans-serif;
+}
+
+body {
+    background-color: #191414;
 }
 
 header {
