@@ -1,0 +1,14 @@
+.artistes {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+#a1, #a2, #a3 {
+    width: 20vw;
+    text-align: center;
+}
+
+#imga1, #imga2, #imga3 {
+    border-radius: 50%;
+}

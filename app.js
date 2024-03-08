@@ -16,6 +16,7 @@ var connect = false
 
 const clientId = process.env.CLIENT_ID
 const clientSecret = process.env.CLIENT_SECRET
+const cleApiYoutube = process.env.CLE_API_YOUTUBE
 
 // Configuration de Spotify
 const spotifyApi = new SpotifyWebApi({
@@ -38,8 +39,6 @@ app.get('/', isLoggedIn, (req, res) => {
     res.render('home', {
         accessToken: req.cookies.accessToken,
         refreshToken: req.cookies.refreshToken,
-        code: req.cookies.code,
-        userId: req.cookies.userId,
         profile: JSON.parse(req.cookies.profile),
         connect: true
     })
@@ -81,13 +80,11 @@ app.get('/callback', async (req, res) => {
         connect = true
 
         const profile = await fetchProfile(accessToken)
-        console.log(profile)
+        // console.log(profile)
 
         // cookies
         res.cookie('accessToken', accessToken, { httpOnly: true, secure: true })
         res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true })
-        res.cookie('code', code, { httpOnly: true, secure: true })
-        res.cookie('userId', userId, { httpOnly: true, secure: true })
         res.cookie('profile', JSON.stringify(profile), { httpOnly: true, secure: true })
 
         res.redirect('/')
@@ -98,14 +95,23 @@ app.get('/callback', async (req, res) => {
     }
 })
 
-app.get('/stats', (req, res) => {
+app.get('/statistics', (req, res) => {
     res.render('stats', {
         accessToken: req.cookies.accessToken,
         refreshToken: req.cookies.refreshToken,
-        code: req.cookies.code,
-        userId: req.cookies.userId,
         profile: JSON.parse(req.cookies.profile),
         connect: connect
+    })
+})
+
+// Route pour /reco (page de recommandations)
+app.get('/recommendations', (req, res) => {
+    res.render('reco', {
+        accessToken: req.cookies.accessToken,
+        refreshToken: req.cookies.refreshToken,
+        profile: JSON.parse(req.cookies.profile),
+        connect: connect,
+        cleApiYoutube: cleApiYoutube
     })
 })
 

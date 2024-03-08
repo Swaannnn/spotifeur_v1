@@ -70,21 +70,21 @@ async function startTracks(timeAgo) {
 
 // // met en forme le résultat pour les artistes
 async function startArtists(timeAgo) {
-  const topArtists = await getTopArtists(timeAgo);
+  const topArtists = await getTopArtists(timeAgo)
     
-  arrayArtistes = [];
-  arrayCovers = [];
+  arrayArtistes = []
+  arrayCovers = []
 
   console.log(topArtists)
 
   for (let i = 0; i < numberTrack; i++) {
     arrayArtistes.push(topArtists?.map(({name}) => `${name}`));
-    arrayCovers.push(topArtists?.map(({images}) => `${images[0]?.url}`));
+    arrayCovers.push(topArtists?.map(({images}) => `${images[0]?.url}`))
   }
-  arrayArtistes = arrayArtistes[0];
-  arrayCovers = arrayCovers[0];
+  arrayArtistes = arrayArtistes[0]
+  arrayCovers = arrayCovers[0]
 
-  addElementArtists(arrayArtistes, arrayCovers);
+  addElementArtists(arrayArtistes, arrayCovers)
 }
 
 // affiche les tracks sur la page

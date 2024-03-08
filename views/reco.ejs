@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reco.css">
+    <title>Spotifeur | Recommandations</title>
+</head>
+
+<body>
+    <%- include('header') %>
+
+    <section>
+        Recommandations (basées sur vos artistes préférés)
+        <div class="artistes">
+            <div id="a1">
+                <img id="imga1" src="" width="160px" height="160px">
+                <p id="namea1"></p>
+                <iframe id="vida1" width="300" height="200" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div id="a2">
+                <img id="imga2" src="" width="160px" height="160px">
+                <p id="namea2"></p>
+                <iframe id="vida2" width="300" height="200" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div id="a3">
+                <img id="imga3" src="" width="160px" height="160px">
+                <p id="namea3"></p>
+                <iframe id="vida3" width="300" height="200" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var accessToken = "<%= accessToken %>"
+        var cleApiYoutube = "<%= cleApiYoutube %>"
+    </script>
+    <script src="/js/reco.js"></script>
+    
+</body>
+
+</html>
