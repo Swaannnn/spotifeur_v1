@@ -22,8 +22,8 @@ const cleApiYoutube = process.env.CLE_API_YOUTUBE
 const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
-    redirectUri: 'http://localhost:8888/callback'
-    // redirectUri: 'https://spotifeur.fr/callback'
+    // redirectUri: 'http://localhost:8888/callback'
+    redirectUri: 'https://spotifeur.fr/callback'
 })
 
 function isLoggedIn(req, res, next) {
@@ -128,11 +128,11 @@ app.get('/logout', (req, res) => {
 
 
 // démarrage serveur
-const port = 8888
-app.listen(port, () => {
-// console.log(`Server is listening at http://localhost:${port}`)
-    console.log('SPOTIFEUR !!')
-})
+// const port = 8888
+// app.listen(port, () => {
+// // console.log(`Server is listening at http://localhost:${port}`)
+//     console.log('SPOTIFEUR !!')
+// })
 
 
 // récupérer infos profil
