@@ -1,0 +1,33 @@
+.result tr td{
+    display:inline-block;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.result tr td img{
+    animation: showup 2s;
+}
+
+.result tr td:last-of-type {
+    animation: reveal 3s;
+}
+
+.result tr td p{
+    animation: slidein 3s;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@keyframes slidein {
+    0% { margin-left:-800px; }
+    100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0px;}
+    20% {opacity:1;width:0px;}
+    100% {opacity:1;width:355px;}
+}
