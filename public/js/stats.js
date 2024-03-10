@@ -94,6 +94,7 @@ function addElementTracks(noms, artistes, covers) {
     let tdcover = document.createElement("td")
     let tdinfos = document.createElement("td")
     let divcover = document.createElement("div")
+    divcover.classList.add("cvr");
     let imgcover = document.createElement("img")
     imgcover.style.height = "150px"
     let ptrack = document.createElement("p")
@@ -216,7 +217,7 @@ elt.forEach(function (elt){
 });
 
 // animation des covers
-const covers = document.querySelectorAll("div")
+const covers = document.querySelectorAll(".cvr")
 covers.forEach( el =>{
   el.addEventListener("mousemove", e =>{
     let elRect = el.getBoundingClientRect()
