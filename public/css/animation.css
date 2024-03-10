@@ -1,10 +1,14 @@
-.result tr td{
+td{
     display:inline-block;
     overflow:hidden;
     white-space:nowrap;
 }
 
-.result tr td img{
+td:hover{
+    overflow:visible;
+}
+
+.result tr td div img{
     animation: showup 2s;
 }
 
@@ -15,6 +19,19 @@
 .result tr td p{
     animation: slidein 3s;
 }
+
+/* des covers*/
+
+td div{
+    perspective: 1000px;
+}
+
+td div img:hover{
+    /*transform: rotateX(30deg) rotateY(30deg);*/
+    transition: all 0.15s ease-out;
+}
+
+/* animations d'arrivée */
 
 @keyframes showup {
     0% {opacity:0;}

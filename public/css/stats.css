@@ -37,3 +37,18 @@
 .vide {
     width: 50px;
 }
+
+.result{
+    border-spacing: 20px;
+}
+
+td div{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+td p {
+    padding-left: 20px;
+    font-size: x-large;
+}
