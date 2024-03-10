@@ -93,6 +93,7 @@ function addElementTracks(noms, artistes, covers) {
     let tr = document.createElement("tr")
     let tdcover = document.createElement("td")
     let tdinfos = document.createElement("td")
+    let divcover = document.createElement("div")
     let imgcover = document.createElement("img")
     imgcover.style.height = "150px"
     let ptrack = document.createElement("p")
@@ -104,7 +105,8 @@ function addElementTracks(noms, artistes, covers) {
 
     table = document.querySelector('.result')
 
-    tdcover.appendChild(imgcover)
+    divcover.appendChild(imgcover)
+    tdcover.appendChild(divcover)
     tdinfos.appendChild(ptrack)
     tdinfos.appendChild(partist)
 
@@ -203,4 +205,37 @@ artiste.addEventListener("click", () => {
   artiste.classList.add("active")
   startArtists(document.querySelector('.btn.active').value)
   resetTop()
+})
+
+// Enlève overflow: hidden à la fin de l'animation d'apparition
+var elt = document.querySelectorAll('td');
+elt.forEach(function (elt){
+  elt.addEventListener('animationend', function() {
+    elt.style.overflow = 'visible';
+  })
+});
+
+// animation des covers
+const covers = document.querySelectorAll("div")
+covers.forEach( el =>{
+  el.addEventListener("mousemove", e =>{
+    let elRect = el.getBoundingClientRect()
+
+    let x = e.clientX - elRect.x
+    let y = e.clientY - elRect.y
+
+    let midCoverW = elRect.width / 2
+    let midCoverH = elRect.height / 2
+
+    // indice d'efficacité de l'effet
+    let angleY = (x - midCoverW) / 3
+    let angleX = (y - midCoverH) / 3
+
+    el.children[0].style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.1)`
+  })
+
+  // replace la cover quand la souris part
+  el.addEventListener("mouseleave", () => {
+    el.children[0].style.transform = "rotateX(0) rotateY(0)"
+  })
 })
