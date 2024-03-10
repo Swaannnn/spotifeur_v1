@@ -106,12 +106,13 @@ section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;
+  z-index: 1;
 }
 
 #spotify {
   transform: translateY(-80px);
   transition: 0.5s;
+  z-index: -1;
 }
 
 .arrows {
