@@ -52,7 +52,7 @@ async function getArtists() {
     return [idArtistsShortTerm, idArtistsMediumTerm, idArtistsLongTerm]
 }
 
-//
+// ajoute les suggestion d'artiste dans les variables
 async function getRelated() {
     var artists = []
     const topArtistsShortTerm = await getTopArtists("short_term", 50)
@@ -99,19 +99,19 @@ async function getRelated() {
 
     let namea4 = artists[0]
     while (artists.includes(namea4) || namea4 == namea1 || namea4 == namea2 || namea4 == namea3) {
-        artist4 = artistRecoShort[Math.floor(Math.random() * 10)]
+        artist4 = artistRecoShort2[Math.floor(Math.random() * 10)]
         namea4 = artist4.name
     }
 
     let namea5 = artists[0]
     while (artists.includes(namea5) || namea5 == namea1 || namea5 == namea2 || namea5 == namea3 || namea5 == namea4) {
-        artist5 = artistRecoMedium[Math.floor(Math.random() * 10)]
+        artist5 = artistRecoMedium2[Math.floor(Math.random() * 10)]
         namea5 = artist5.name
     }
     
     let namea6 = artists[0]
     while (artists.includes(namea6) || namea6 == namea1 || namea6 == namea2 || namea6 == namea3 || namea6 == namea4 || namea6 == namea5) {
-        artist6 = artistRecoLong[Math.floor(Math.random() * 10)]
+        artist6 = artistRecoLong2[Math.floor(Math.random() * 10)]
         namea6 = artist6.name
     }
 
@@ -120,38 +120,63 @@ async function getRelated() {
 
 var artists = []
 
-async function test() {
-    artists = await getRelated()
-    addRelatedArtists(0)
-}
-
-test()
-
-async function addRelatedArtists(index) {
-    const color1 = ["#79d2e6", "#ff6961", "#b0f2b6", "#cca9dd", "#c0ab8f", "#fd6c9e"]
-
-    const reco = document.querySelector(".reco")
-    const name = document.getElementById("name")
-    const genre = document.getElementById("genre")
-    const image = document.getElementById("image")
-
-    reco.style.backgroundColor = color1[index]
-
-    name.textContent = artists[index].name
-    if (artists[index].genres[0] == null) {
-        genre.textContent = "‎"
-    } else {
-        genre.textContent = artists[index].genres[0]
-    }
-    image.src = artists[index].images[0].url
-}
-
+const image = document.getElementById("image")
+const color = ["#79d2e6", "#ff6961", "#b0f2b6", "#cca9dd", "#c0ab8f", "#fd6c9e"]
+const reco = document.querySelector(".reco")
+const name = document.getElementById("name")
+const genre = document.getElementById("genre")
 const leftArrow = document.getElementById("leftArrow")
 const rightArrow = document.getElementById("rightArrow")
+const bntYouTube = document.querySelector(".btnYouTube")
+const youtube = document.querySelector(".youtube")
+const blur = document.querySelector(".blur")
+const close = document.getElementById("close")
+const video = document.getElementById("video")
+const load = document.querySelector(".load")
+
+async function addFirstArtist() {
+    artists = await getRelated()
+    addRelatedArtists(0)
+    setTimeout(() => {
+        load.style.display = "none"
+    }, 500)
+}
+
+// ajoute le premier artiste au chargement de la page
+addFirstArtist()
+
+async function addRelatedArtists(index) {
+    reco.style.backgroundColor = color[index]
+
+    setTimeout(() => {
+        name.textContent = artists[index].name
+        if (artists[index].genres[0] == null) {
+            genre.textContent = "‎"
+        } else {
+            genre.textContent = artists[index].genres[0]
+        }
+        image.src = artists[index].images[0].url
+    }, 500)
+}
 
 let nb = 0
 
+function transition(index) {
+    var styleElement = document.createElement('style')
+    var styleText = '#name::after { width: 0% !important; }'
+    styleElement.appendChild(document.createTextNode(styleText))
+    document.getElementsByTagName('head')[0].appendChild(styleElement)
+        
+    const reco = document.querySelector(".reco")
+    reco.style.backgroundColor = color[index]
+
+    setTimeout(() => {
+        styleElement.firstChild.nodeValue = '#name::after { width: 120% !important; }'
+    }, 1000)
+}
+
 leftArrow.addEventListener("click", () => {
+    transition(nb)
     if (nb == 0) {
         nb = 5
     } else {
@@ -161,6 +186,7 @@ leftArrow.addEventListener("click", () => {
 })
 
 rightArrow.addEventListener("click", () => {
+    transition(nb)
     if (nb == 5) {
         nb = 0
     } else {
@@ -169,37 +195,64 @@ rightArrow.addEventListener("click", () => {
     addRelatedArtists(nb)
 })
 
+async function showDivYt() {
+    youtube.style.display = "flex"
+    blur.style.display = "flex"
+
+    setTimeout(() => {
+        youtube.style.transform = "translateY(0)"
+        youtube.style.backgroundColor = color[nb]
+        blur.style.transform = "translateY(0)"
+    }, 1)
+
+    console.log(artists[nb].name)
+    url = await getVideoUrl(artists[nb].name)
+    console.log(url)
+    video.src = url
+}
+
+bntYouTube.addEventListener("click", () => {
+    showDivYt()
+})
+
+close.addEventListener(("click"), () => {
+    youtube.style.transform = "translateY(200vh)"
+    blur.style.transform = "translateY(200vh)"
+
+    setTimeout(() => {
+        youtube.style.display = "none"
+        blur.style.display = "none"
+    }, 1000)
+
+    video.src = ""
+})
 
 
-// YOUTUBE
+// récupère une
+async function searchYouTube(query) {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${encodeURIComponent(query)}&key=${cleApiYoutube}`
 
-// async function searchYouTube(query, apiKey) {
-//     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`
+    const response = await fetch(url)
+    const data = await response.json()
 
-//     const response = await fetch(url)
-//     const data = await response.json()
+    let videoId
 
-//     let videoId
+    if (data.items[0].id.kind === 'youtube#channel') {
+        videoId = data.items[1].id.videoId
+    } else {
+        videoId = data.items[0].id.videoId
+    }
 
-//     if (data.items[0].id.kind === 'youtube#channel') {
-//         videoId = data.items[1].id.videoId
-//     } else {
-//         videoId = data.items[0].id.videoId
-//     }
+    const videoUrl = `https://www.youtube.com/embed/${videoId}`
 
-//     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
-
-//     return videoUrl
-// }
+    return videoUrl
+}
 
 
-// async function yt(query) {
-//     try {
-//         const apiKey = cleApiYoutube
-
-//         const videoUrl = await searchYouTube(query, apiKey)
-//         return videoUrl
-//     } catch (error) {
-//         console.error('Erreur lors de la recherche sur YouTube :', error)
-//     }
-// }
+async function getVideoUrl(query) {
+    try {
+        return await searchYouTube(query)
+    } catch (error) {
+        console.error('Erreur lors de la recherche sur YouTube :', error)
+    }
+}

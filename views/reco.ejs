@@ -10,25 +10,31 @@
 <body>
     <%- include('header') %>
     <section>
-        <p>Recommandations (basées sur vos artistes préférés)</p>
-
+        <!-- <p>Recommandations (basées sur vos artistes préférés)</p> -->
         <div class="reco">
             <div class="description">
                 <div class="name"><p id="name"></p></div>
                 <p id="genre"></p>
-                <!-- <br> -->
                 <button class="btnYouTube">&nbsp;</button>
             </div>
             <div class="image">
-                <img id="image" src="" width="200" height="200">
+                <img id="image" src="img/hide.png" width="200" height="200">
             </div>
             <div class="arrows">
                 <img id="leftArrow" src="img/arrow.png" style="transform: rotate(180deg);" width="30px" height="30px">
                 <img id="rightArrow" src="img/arrow.png" width="30px" height="30px">
             </div>
         </div>
-
+        <div class="load">
+            <div id="loader"></div>
+        </div>
     </section>
+
+    <div class="blur"></div>
+    <div class="youtube">
+        <img id="close" src="img/croix.png" width="40px">
+        <iframe id="video" width="960" height="540" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
 
     <script>
         var accessToken = "<%= accessToken %>"
