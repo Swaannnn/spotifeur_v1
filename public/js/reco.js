@@ -58,14 +58,14 @@ async function getRelated() {
     const topArtistsShortTerm = await getTopArtists("short_term", 50)
     const topArtistsMediumTerm = await getTopArtists("medium_term", 50)
     const topArtistsLongTerm = await getTopArtists("long_term", 50)
-    for (i=0; i<50; i++) {
-        if (!(artists.includes(topArtistsLongTerm[i].name))) {
+    for (let i = 0; i < 50; i++) {
+        if (i < topArtistsLongTerm.length && !(artists.includes(topArtistsLongTerm[i].name))) {
             artists.push(topArtistsLongTerm[i].name)
         }
-        if (!(artists.includes(topArtistsMediumTerm[i].name))) {
+        if (i < topArtistsMediumTerm.length && !(artists.includes(topArtistsMediumTerm[i].name))) {
             artists.push(topArtistsMediumTerm[i].name)
         }
-        if (!(artists.includes(topArtistsShortTerm[i].name))) {
+        if (i < topArtistsShortTerm.length && !(artists.includes(topArtistsShortTerm[i].name))) {
             artists.push(topArtistsShortTerm[i].name)
         }
     }
@@ -123,6 +123,7 @@ var artists = []
 const image = document.getElementById("image")
 const imaga = document.getElementById("imaga")
 const spotify = document.getElementById("spotify")
+const spotify2 = document.getElementById("spotify2")
 const color = ["#79d2e6", "#ff6961", "#b0f2b6", "#cca9dd", "#c0ab8f", "#fd6c9e"]
 const reco = document.querySelector(".reco")
 const name = document.getElementById("name")
@@ -199,11 +200,13 @@ rightArrow.addEventListener("click", () => {
 })
 
 imaga.addEventListener("mouseover", () => {
-    spotify.style.transform = "translateY(-120px)"
+    // spotify.style.transform = "translateY(-140px)"
+    spotify2.hidden = false
 })
 
 imaga.addEventListener("mouseout", () => {
-    spotify.style.transform = "translateY(-80px)";
+    // spotify.style.transform = "translateY(-70px)";
+    spotify2.hidden = true
 });
 
 async function showDivYt() {
