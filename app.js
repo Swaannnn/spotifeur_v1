@@ -80,7 +80,6 @@ app.get('/callback', async (req, res) => {
         connect = true
 
         const profile = await fetchProfile(accessToken)
-        // console.log(profile)
 
         // cookies
         res.cookie('accessToken', accessToken, { httpOnly: true, secure: true })
@@ -91,7 +90,6 @@ app.get('/callback', async (req, res) => {
     } catch (error) {
         console.error('Erreur lors de la récupération du profil:', error)
         res.status(500).render('error', { message: 'Une erreur est survenue lors de la récupération du profil.' })
-        // next(error)
     }
 })
 

@@ -120,10 +120,10 @@ async function getRelated() {
 
 var artists = []
 
+const opens = document.getElementById("open")
 const image = document.getElementById("image")
 const imaga = document.getElementById("imaga")
 const spotify = document.getElementById("spotify")
-const spotify2 = document.getElementById("spotify2")
 const color = ["#79d2e6", "#ff6961", "#b0f2b6", "#cca9dd", "#c0ab8f", "#fd6c9e"]
 const reco = document.querySelector(".reco")
 const name = document.getElementById("name")
@@ -200,14 +200,24 @@ rightArrow.addEventListener("click", () => {
 })
 
 imaga.addEventListener("mouseover", () => {
-    // spotify.style.transform = "translateY(-140px)"
-    spotify2.hidden = false
+    spotify.hidden = false
+    image.style.webkitFilter = "blur(5px)"
 })
 
 imaga.addEventListener("mouseout", () => {
-    // spotify.style.transform = "translateY(-70px)";
-    spotify2.hidden = true
-});
+    spotify.hidden = true
+    image.style.webkitFilter = "none"
+})
+
+spotify.addEventListener("mouseover", () => {
+    spotify.hidden = false
+    image.style.webkitFilter = "blur(5px)"
+})
+
+spotify.addEventListener("mouseout", () => {
+    spotify.hidden = true
+    image.style.webkitFilter = "none"
+})
 
 async function showDivYt() {
     youtube.style.display = "flex"

@@ -6,8 +6,10 @@ section {
 
 .reco {
   background-color: #79d2e6;
-  width: 500px;
-  height: 300px;
+  /* width: 500px; */
+  /* height: 300px; */
+  width: 50vw;
+  height: 50vh;
 
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -114,29 +116,17 @@ section {
   -webkit-filter: blur(5px);
   transition: 0.5s;
 }
-/* 
-#image::after {
-  content: 'SPOTIFY';
-} */
 
-/* #spotify {
-  transform: translateY(-70px);
-  transition: 0.5s;
-  z-index: -1;
-
-  text-align: center;
-  font-weight: bold;
-  font-size: 26px;
-  color: #ffe54c;
-  -webkit-text-stroke: black 1px;
-} */
-
-#spotify2 {
+#spotify {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 
-  font-size: 25px;
+  font-size: 30px;
   color: white;
-  -webkit-text-stroke: black 1px;
+  -webkit-text-stroke: black 0.5px;
 
   z-index: 2;
   animation: appear 0.5s;
@@ -240,13 +230,16 @@ body {
 
 .load {
   position: absolute;
-  top: 0;
-  left: calc(50vw - (358px));
+  /* top: 0; */
+  /* left: calc(50vw); */
   background-color: #79d2e6;
   display: flex;
 
-  width: 500px;
-  height: 300px;
+  /* width: 500px; */
+  /* height: 300px; */
+  width: 50vw;
+  height: 50vh;
+
   padding: 50px 100px;
 
   z-index: 3;
