@@ -101,12 +101,17 @@ section {
   position: relative;
 }
 
-#image,
-#image2 {
+#image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+#spotify {
+  transform: translateY(-80px);
+  transition: 0.5s;
 }
 
 .arrows {

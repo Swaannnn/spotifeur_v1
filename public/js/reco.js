@@ -121,6 +121,8 @@ async function getRelated() {
 var artists = []
 
 const image = document.getElementById("image")
+const imaga = document.getElementById("imaga")
+const spotify = document.getElementById("spotify")
 const color = ["#79d2e6", "#ff6961", "#b0f2b6", "#cca9dd", "#c0ab8f", "#fd6c9e"]
 const reco = document.querySelector(".reco")
 const name = document.getElementById("name")
@@ -156,6 +158,7 @@ async function addRelatedArtists(index) {
             genre.textContent = artists[index].genres[0]
         }
         image.src = artists[index].images[0].url
+        imaga.href = artists[index].external_urls.spotify
     }, 500)
 }
 
@@ -194,6 +197,14 @@ rightArrow.addEventListener("click", () => {
     }
     addRelatedArtists(nb)
 })
+
+imaga.addEventListener("mouseover", () => {
+    spotify.style.transform = "translateY(-120px)"
+})
+
+imaga.addEventListener("mouseout", () => {
+    spotify.style.transform = "translateY(-80px)";
+});
 
 async function showDivYt() {
     youtube.style.display = "flex"
