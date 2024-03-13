@@ -124,6 +124,8 @@ function addElementArtists(artistes, covers) {
     let tr = document.createElement("tr")
     let tdcover = document.createElement("td")
     let tdinfos = document.createElement("td")
+    let divartist = document.createElement("div")
+    divcover.classList.add("cvr");
     let imgartist = document.createElement("img")
     imgartist.style.height = "150px"
     let partist = document.createElement("p")
@@ -133,7 +135,8 @@ function addElementArtists(artistes, covers) {
 
     table = document.querySelector('.result')
 
-    tdcover.appendChild(imgartist)
+    divartist.appendChild(imgartist)
+    tdcover.appendChild(divartist)
     tdinfos.appendChild(partist)
 
     tr.appendChild(tdcover)

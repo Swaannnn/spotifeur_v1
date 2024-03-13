@@ -4,10 +4,6 @@ td{
     white-space:nowrap;
 }
 
-td:hover{
-    overflow:visible;
-}
-
 .result tr td div img{
     animation: showup 2s;
 }
