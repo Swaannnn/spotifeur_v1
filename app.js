@@ -23,7 +23,8 @@ const spotifyApi = new SpotifyWebApi({
     clientId: clientId,
     clientSecret: clientSecret,
     // redirectUri: 'http://localhost:8888/callback'
-    redirectUri: 'https://spotifeur.fr/callback'
+    // redirectUri: 'https://spotifeur.fr/callback'
+    redirectUri: 'https://spotifeur.onrender.com/callback'
 })
 
 function isLoggedIn(req, res, next) {
